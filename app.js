@@ -25,6 +25,14 @@ function getShortName(path){
   return shortName;
 };
 
+function getShortNameLong(path){
+  var shortName = path.split('/');
+  shortName = shortName[10];
+  shortName = shortName.split('.');
+  shortName = shortName[0];
+  return shortName;
+};
+
 ///On click event
 function imgClick(event){
   var imgName = event.target.src;
@@ -63,13 +71,13 @@ function displayedImgs(){
   var imageTwo = document.getElementById('second-image').src;
   var imageThree = document.getElementById('third-image').src;
 
-  var shortNameOne = getShortName(imageOne);
-  var shortNameTwo = getShortName(imageTwo);
-  var shortNameThree = getShortName(imageThree);
+  var shortNameOne = getShortNameLong(imageOne);
+  var shortNameTwo = getShortNameLong(imageTwo);
+  var shortNameThree = getShortNameLong(imageThree);
 
-  var indexOne;
-  var indexTwo;
-  var indexThree;
+  var indexOne = -1;
+  var indexTwo = -1;
+  var indexThree = -1;
 
   for(var i = 0; i < images.length; i ++){
     if(shortNameOne === images[i].shortName){
@@ -81,32 +89,41 @@ function displayedImgs(){
     }
   }
   var indexArray = [indexOne, indexTwo, indexThree];
+  console.log(indexArray);
   return indexArray;
 
 }
 
+function randomNumber(){
+  var number = Math.floor(Math.random() * ((images.length - 1) - 0 + 1)) + 0;
+  return number;
+}
+
 ///Displays images at random
 function randomImages(current, imagesArray) {
-  ///random number from number of items in array
-  var indexOne = imagesArray[0];
-  var indexTwo = imagesArray[1];
-  var indexThree = imagesArray[2];
+  var randomOne = randomNumber();
+  var randomTwo = randomNumber();
+  var randomThree = randomNumber();
 
-  var randomOne = Math.floor(Math.random() * ((images.length - 1) - 0 + 1)) + 0;
-  var randomTwo = Math.floor(Math.random() * ((images.length - 1) - (randomOne + 1))) + randomOne;
-  var randomThree = Math.floor(Math.random() * ((randomOne - 1) - 0 + 1)) + 0;
-
+  var comparison;
   if(randomOne === randomTwo || randomOne === randomThree || randomTwo === randomThree){
-    var randomOne = Math.floor(Math.random() * ((images.length - 1) - 0 + 1)) + 0;
-    var randomTwo = Math.floor(Math.random() * ((images.length - 1) - (randomOne + 1))) + randomOne;
-    var randomThree = Math.floor(Math.random() * ((randomOne - 1) - 0 + 1)) + 0;
-  } else if(randomOne === current || randomOne === indexOne || randomOne === indexTwo || randomOne === indexThree){ ///Change random number if it equals current index
-    randomOne = Math.floor(Math.random() * ((images.length - 1) - (current + 1) + 1)) + (current + 1);
-  }else if(randomTwo === current || randomTwo === indexOne || randomTwo === indexTwo || randomTwo === indexThree){
-    randomTwo = Math.floor(Math.random() * ((images.length - 1) - (current + 1) + 1)) + (current + 1);
-  } else if(randomThree === current || randomThree === indexOne || randomThree === indexTwo || randomThree === indexThree){
-    randomThree = Math.floor(Math.random() * ((images.length - 1) - (current + 1) + 1)) + (current + 1);
+    comparison = true;
   }
+
+  var matchOne = imagesArray.indexOf(randomOne);
+  var matchTwo = imagesArray.indexOf(randomTwo);
+  var matchThree = imagesArray.indexOf(randomThree);
+
+  while(comparison || matchOne > -1 || matchTwo > -1 || matchThree > -1){
+    randomOne = randomNumber();
+    randomTwo = randomNumber();
+    randomThree = randomNumber();
+    comparison = false;
+    matchOne = -1;
+    matchTwo = -1;
+    matchThree = -1;
+  }
+
   ///Gets path of image and puts in src of image ids
   firstImageEl.src = images[randomOne].path;
   secondImageEl.src = images[randomTwo].path;
