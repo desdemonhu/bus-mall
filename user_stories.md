@@ -1,16 +1,18 @@
-marketing research team
-As a member of the marketing team, I want to know what product the user wants to buy the most.
+# User Stories
+## Marketing Research Team
 
-As a member of the marketing team, I want to know what product we shouldn't sell based on user feedback.
+*As a member of the marketing team, I want to know what product the user wants to buy the most.
 
-As a member of the marketing team, I want to see a ranking of all images.
+*As a member of the marketing team, I want to know what product we shouldn't sell based on user feedback.
 
-As a member of the marketing team, I want to compare the number of times an image appeared to the number of times it was clicked on.
+*As a member of the marketing team, I want to see a ranking of all images.
 
-As a member of the marketing team, I only want a sample size of 25 votes.
+*As a member of the marketing team, I want to compare the number of times an image appeared to the number of times it was clicked on.
+
+*As a member of the marketing team, I only want a sample size of 25 votes.
 
 
-developer
+## Developer
 As a developer, I want to create a constructor function that captures all the useful properties of the image ranking system.
 
 As a developer, I want to track the number of times an image is displayed vs how many times the image was clicked.

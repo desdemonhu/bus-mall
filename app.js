@@ -24,8 +24,8 @@ function Image(name, path){
 
 ///create an object for each image
 var images = [
-  new Image('bag','assets/bag.jpg'),
-  new Image('banana', 'assets/banana.jpg')
+  new Image('bag','img/bag.jpg'),
+  new Image('banana', 'img/banana.jpg')
 ];
 console.log(images[0].idTag);
 //This is how to get to an images current url:   imageEls["0"].currentSrc
