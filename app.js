@@ -39,12 +39,23 @@ function imgClick(event){
 function randomImages() {
   ///random number from number of items in array
   var randomOne = Math.floor(Math.random() * ((images.length - 1) - 0 + 1)) + 0;
-  var randomTwo = Math.floor(Math.random() * ((images.length - 1) - randomOne + 1)) + 0;
-  var randomThree = Math.floor(Math.random() * ((images.length - 1) - randomTwo + 1)) + 0;
+  var randomTwo = Math.floor(Math.random() * ((images.length - 1) - randomOne + 1)) + randomOne;
+  var randomThree = Math.floor(Math.random() * ((images.length - 1) - 0 + 1)) + 0;
+
+  if(randomOne === randomTwo || randomOne === randomThree || randomTwo === randomThree){
+    randomOne = 1;
+    randomTwo = 2;
+    randomThree = 3;
+  }
   ///Gets path of image and puts in src of image ids
   firstImageEl.src = images[randomOne].path;
   secondImageEl.src = images[randomTwo].path;
   thirdImageEl.src = images[randomThree].path;
+
+  ///Update image shown
+  images[randomOne].shown += 1;
+  images[randomTwo].shown += 1;
+  images[randomThree].shown += 1;
 }
 
 var images = [
@@ -52,8 +63,8 @@ var images = [
   new Image('banana', 'img/banana.jpg'),
   new Image('bathroom','img/bathroom.jpg'),
   new Image('boots', 'img/boots.jpg'),
-  new Image('breakfast', 'img/breakfast.jpb'),
-  new Image('bubblegum', 'img/bubblegum'),
+  new Image('breakfast', 'img/breakfast.jpg'),
+  new Image('bubblegum', 'img/bubblegum.jpg'),
   new Image('chair', 'img/chair.jpg'),
   new Image('cthulhu', 'img/cthulhu.jpg'),
   new Image('dog-duck', 'img/dog-duck.jpg'),
