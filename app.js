@@ -1,4 +1,10 @@
 'use strict';
+///Display 3 products at a time
+///Select 1 of 3 then change all images?
+///Track total number of clicks on image
+///Precentage of times an item was clicked when it was shown (display vs clicked)
+///25 selections then results are displayed
+
 
 var imageEls = document.getElementsByClassName('medium');
 
