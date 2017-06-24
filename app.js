@@ -7,56 +7,105 @@
 ///25 selections then results are displayed. No clicks anymore
 ///Results of all images # of votes for nameOfImage
 
-
 function Image(name, path){
   this.name = name;
   this.path = path;
   this.shown = 0;
   this.clicked = 0;
-  this.shortName = this.path.split('/');
-  this.shortName = this.shortName[1].split('.');
-  this.shortName = this.shortName[0];
+  this.shortName = getShortName(this.path);
   this.idTag = 'img-' + this.shortName;
 }
 
-//This is how to get to an images current url:   imageEls["0"].currentSrc
-
-Image.prototype.changeImage = function(){
-  ///Get id of image clicked
-  ///Change .src of that ID
+///Gets shortName from Path
+function getShortName(path){
+  var shortName = path.split('/');
+  shortName = shortName[1];
+  shortName = shortName.split('.');
+  shortName = shortName[0];
+  return shortName;
 };
 
+///On click event
 function imgClick(event){
-  /// Get's image in image array and updates +1 clicked
   var imgName = event.target.src;
   imgName = imgName.split('/');
-  var imgPath = imgName[10];
-  imgPath = imgPath.split('.');
-  imgPath = imgPath[0];
+  imgName = imgName[10];
+  var imgPath = imgName.split('.');
+  var imgPath = imgPath[0];
   console.log(imgPath);
+
+  //mark where in images array the shortName is found
   var index = -1;
 
+/// Gets image in image array
   for(var i = 0; i < images.length; i++ ){
     if(images[i].shortName === imgPath){
       index = i;
       console.log(index);
     }
   }
+  if(index > -1){
+  ///updates +1 clicked
+    images[index].clicked += 1;
+    console.log(images[index]);
+  }
+///Gets what images are currently being displayed and puts them in an array
+  var imagesArray = displayedImgs();
+
   ///changes image
   ///Get's new image from array and updates shown +1
+  randomImages(index, imagesArray);
 }
 
-///Displays first set of images at random
-function randomImages() {
+///What are current images being displayed
+function displayedImgs(){
+  var imageOne = document.getElementById('first-image').src;
+  var imageTwo = document.getElementById('second-image').src;
+  var imageThree = document.getElementById('third-image').src;
+
+  var shortNameOne = getShortName(imageOne);
+  var shortNameTwo = getShortName(imageTwo);
+  var shortNameThree = getShortName(imageThree);
+
+  var indexOne;
+  var indexTwo;
+  var indexThree;
+
+  for(var i = 0; i < images.length; i ++){
+    if(shortNameOne === images[i].shortName){
+      indexOne = i;
+    }else if(shortNameTwo === images[i].shortName){
+      indexTwo = i;
+    }else if(shortNameThree === images[i].shortName){
+      indexThree = i;
+    }
+  }
+  var indexArray = [indexOne, indexTwo, indexThree];
+  return indexArray;
+
+}
+
+///Displays images at random
+function randomImages(current, imagesArray) {
   ///random number from number of items in array
+  var indexOne = imagesArray[0];
+  var indexTwo = imagesArray[1];
+  var indexThree = imagesArray[2];
+
   var randomOne = Math.floor(Math.random() * ((images.length - 1) - 0 + 1)) + 0;
-  var randomTwo = Math.floor(Math.random() * ((images.length - 1) - randomOne + 1)) + randomOne;
-  var randomThree = Math.floor(Math.random() * ((images.length - 1) - 0 + 1)) + 0;
+  var randomTwo = Math.floor(Math.random() * ((images.length - 1) - (randomOne + 1))) + randomOne;
+  var randomThree = Math.floor(Math.random() * ((randomOne - 1) - 0 + 1)) + 0;
 
   if(randomOne === randomTwo || randomOne === randomThree || randomTwo === randomThree){
-    randomOne = 1;
-    randomTwo = 2;
-    randomThree = 3;
+    var randomOne = Math.floor(Math.random() * ((images.length - 1) - 0 + 1)) + 0;
+    var randomTwo = Math.floor(Math.random() * ((images.length - 1) - (randomOne + 1))) + randomOne;
+    var randomThree = Math.floor(Math.random() * ((randomOne - 1) - 0 + 1)) + 0;
+  } else if(randomOne === current || randomOne === indexOne || randomOne === indexTwo || randomOne === indexThree){ ///Change random number if it equals current index
+    randomOne = Math.floor(Math.random() * ((images.length - 1) - (current + 1) + 1)) + (current + 1);
+  }else if(randomTwo === current || randomTwo === indexOne || randomTwo === indexTwo || randomTwo === indexThree){
+    randomTwo = Math.floor(Math.random() * ((images.length - 1) - (current + 1) + 1)) + (current + 1);
+  } else if(randomThree === current || randomThree === indexOne || randomThree === indexTwo || randomThree === indexThree){
+    randomThree = Math.floor(Math.random() * ((images.length - 1) - (current + 1) + 1)) + (current + 1);
   }
   ///Gets path of image and puts in src of image ids
   firstImageEl.src = images[randomOne].path;
@@ -100,4 +149,4 @@ firstImageEl.addEventListener('click', imgClick);
 secondImageEl.addEventListener('click', imgClick);
 thirdImageEl.addEventListener('click', imgClick);
 
-randomImages();
+randomImages(-1, [-1,-1,-1]);
