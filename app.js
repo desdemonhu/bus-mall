@@ -35,6 +35,9 @@ function getShortNameLong(path){
 
 ///On click event
 function imgClick(event){
+  totalClicks += 1;
+  console.log('total clicks: ' + totalClicks);
+
   var imgName = event.target.src;
   imgName = imgName.split('/');
   imgName = imgName[10];
@@ -62,7 +65,12 @@ function imgClick(event){
 
   ///changes image
   ///Get's new image from array and updates shown +1
-  randomImages(index, imagesArray);
+  if(totalClicks > 25){
+    ///Display the results
+    console.log('25 click achieved!');
+  }else{
+    randomImages(index, imagesArray);
+  }
 }
 
 ///What are current images being displayed
@@ -82,9 +90,11 @@ function displayedImgs(){
   for(var i = 0; i < images.length; i ++){
     if(shortNameOne === images[i].shortName){
       indexOne = i;
-    }else if(shortNameTwo === images[i].shortName){
+    }
+    if(shortNameTwo === images[i].shortName){
       indexTwo = i;
-    }else if(shortNameThree === images[i].shortName){
+    }
+    if(shortNameThree === images[i].shortName){
       indexThree = i;
     }
   }
@@ -118,10 +128,21 @@ function randomImages(current, imagesArray) {
     randomOne = randomNumber();
     randomTwo = randomNumber();
     randomThree = randomNumber();
-    comparison = false;
-    matchOne = -1;
-    matchTwo = -1;
-    matchThree = -1;
+
+    matchOne = imagesArray.indexOf(randomOne);
+    matchTwo = imagesArray.indexOf(randomTwo);
+    matchThree = imagesArray.indexOf(randomThree);
+
+    if(randomOne === randomTwo || randomOne === randomThree || randomTwo === randomThree){
+      comparison = true;
+    }else if(matchOne > -1 || matchTwo > -1 || matchThree > -1){
+      comparison = true;
+    }else {
+      comparison = false;
+      matchOne = -1;
+      matchTwo = -1;
+      matchThree = -1;
+    }
   }
 
   ///Gets path of image and puts in src of image ids
@@ -161,6 +182,7 @@ var images = [
 var firstImageEl = document.getElementById('first-image');
 var secondImageEl = document.getElementById('second-image');
 var thirdImageEl = document.getElementById('third-image');
+var totalClicks = 0;
 
 firstImageEl.addEventListener('click', imgClick);
 secondImageEl.addEventListener('click', imgClick);
