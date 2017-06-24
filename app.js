@@ -13,10 +13,10 @@ function Image(name, path){
   this.path = path;
   this.shown = 0;
   this.clicked = 0;
-  var shortName = path.split('/');
-  shortName = shortName[1].split('.');
-  shortName = shortName[0];
-  this.idTag = 'img-' + shortName;
+  this.shortName = this.path.split('/');
+  this.shortName = this.shortName[1].split('.');
+  this.shortName = this.shortName[0];
+  this.idTag = 'img-' + this.shortName;
 }
 
 //This is how to get to an images current url:   imageEls["0"].currentSrc
@@ -25,12 +25,23 @@ Image.prototype.changeImage = function(){
   ///Get id of image clicked
   ///Change .src of that ID
 };
-///Create a function that creates new Image objects and push to images array
-
-///create an object for each image
 
 function imgClick(event){
   /// Get's image in image array and updates +1 clicked
+  var imgName = event.target.src;
+  imgName = imgName.split('/');
+  var imgPath = imgName[10];
+  imgPath = imgPath.split('.');
+  imgPath = imgPath[0];
+  console.log(imgPath);
+  var index = -1;
+
+  for(var i = 0; i < images.length; i++ ){
+    if(images[i].shortName === imgPath){
+      index = i;
+      console.log(index);
+    }
+  }
   ///changes image
   ///Get's new image from array and updates shown +1
 }
@@ -84,6 +95,9 @@ var images = [
 var firstImageEl = document.getElementById('first-image');
 var secondImageEl = document.getElementById('second-image');
 var thirdImageEl = document.getElementById('third-image');
-console.log(firstImageEl);
+
+firstImageEl.addEventListener('click', imgClick);
+secondImageEl.addEventListener('click', imgClick);
+thirdImageEl.addEventListener('click', imgClick);
 
 randomImages();
