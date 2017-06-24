@@ -67,7 +67,7 @@ function imgClick(event){
   ///Get's new image from array and updates shown +1
   if(totalClicks > 25){
     ///Display the results
-    console.log('25 click achieved!');
+    displayResults();
   }else{
     randomImages(index, imagesArray);
   }
@@ -144,7 +144,6 @@ function randomImages(current, imagesArray) {
       matchThree = -1;
     }
   }
-
   ///Gets path of image and puts in src of image ids
   firstImageEl.src = images[randomOne].path;
   secondImageEl.src = images[randomTwo].path;
@@ -154,6 +153,11 @@ function randomImages(current, imagesArray) {
   images[randomOne].shown += 1;
   images[randomTwo].shown += 1;
   images[randomThree].shown += 1;
+}
+
+function displayResults(){
+  ///Arranges pictures in order of clicks
+  console.log('25 clicks achieved!');
 }
 
 var images = [
