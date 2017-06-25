@@ -156,8 +156,26 @@ function randomImages(current, imagesArray) {
 }
 
 function displayResults(){
+  arrangeResults();
   ///Arranges pictures in order of clicks
   console.log('25 clicks achieved!');
+}
+
+function arrangeResults(){
+  images.sort(function(a,b){
+    var one = a.clicked;
+    var two = b.clicked;
+
+    if(one > two){
+      return -1;
+    }
+    if(one < two){
+      return 1;
+    }
+    return 0;
+  });
+  console.log('This is arranged array:');
+  console.log(images);
 }
 
 var images = [
