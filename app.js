@@ -85,7 +85,7 @@ function imgClick(event){
 
   ///changes image
   ///Get's new image from array and updates shown +1
-  if(totalClicks > 25){
+  if(totalClicks >= 25){
     ///Display the results
     displayResults();
   }else{
@@ -184,6 +184,7 @@ function displayResults(){
   thirdImageEl.removeEventListener('click', imgClick);
   console.log('25 clicks achieved!');
 
+  document.getElementById('voting').style.display = 'none';
   document.getElementById('results-table').style.display = 'block';
 
   for(var i = 0; i < images.length; i++){
