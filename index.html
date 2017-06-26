@@ -6,9 +6,28 @@
     <title>Bus Mall</title>
   </head>
   <body>
-    <img src="assets/bag.jpg" alt="" class="medium">
-    <img src="assets/banana.jpg" alt="" class="medium">
-    <img src="assets/bathroom.jpg" alt="" class="medium">
+    <section id = 'voting'>
+      <h1>Product Voting</h1>
+      <button type="button" name="first-image"><img src="" alt="" class="medium" id="first-image"></button>
+
+      <button type="button" name="second-image"><img src="" alt="" class="medium" id="second-image"></button>
+
+      <button type="button" name="third-image"><img src="" alt="" class="medium" id="third-image"></button>
+    </section>
+    <section id ="results-section">
+      <h1>Thank you for voting!</h1>
+      <table id = "results-table">
+        <thead>
+          <tr>
+            <th>Picture</th>
+            <th>Votes</th>
+          </tr>
+        </thead>
+        <tbody id="results-gallery">
+        </tbody>
+      </table>
+    </section>
+
     <script type="text/javascript" src="app.js"></script>
   </body>
 </html>
