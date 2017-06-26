@@ -16,6 +16,26 @@ function Image(name, path){
   this.idTag = 'img-' + this.shortName;
 }
 
+Image.prototype.calculatePercent = function(){
+  return (this.clicked * 100) / this.shown;
+};
+
+Image.prototype.displayImageResult = function(){
+  var tableRowEl = document.createElement('tr');
+  var tableCellEl = document.createElement('td');
+  var imageEl = document.createElement('img');
+  var imageCaptionEl = document.createElement('td');
+
+  imageEl.setAttribute('src', this.path);
+  imageEl.setAttribute('class', 'small');
+  imageCaptionEl.textContent = this.clicked + ' votes for the ' + this.name;
+
+  tableCellEl.appendChild(imageEl);
+  tableRowEl.appendChild(tableCellEl);
+  tableRowEl.appendChild(imageCaptionEl);
+  resultsGalleryEl.appendChild(tableRowEl);
+};
+
 ///Gets shortName from Path
 function getShortName(path){
   var shortName = path.split('/');
@@ -156,9 +176,19 @@ function randomImages(current, imagesArray) {
 }
 
 function displayResults(){
-  arrangeResults();
   ///Arranges pictures in order of clicks
+  arrangeResults();
+
+  firstImageEl.removeEventListener('click', imgClick);
+  secondImageEl.removeEventListener('click', imgClick);
+  thirdImageEl.removeEventListener('click', imgClick);
   console.log('25 clicks achieved!');
+
+  document.getElementById('results-table').style.display = 'block';
+
+  for(var i = 0; i < images.length; i++){
+    images[i].displayImageResult();
+  }
 }
 
 function arrangeResults(){
@@ -204,6 +234,7 @@ var images = [
 var firstImageEl = document.getElementById('first-image');
 var secondImageEl = document.getElementById('second-image');
 var thirdImageEl = document.getElementById('third-image');
+var resultsGalleryEl = document.getElementById('results-gallery');
 var totalClicks = 0;
 
 firstImageEl.addEventListener('click', imgClick);
