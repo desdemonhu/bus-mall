@@ -185,7 +185,7 @@ function displayResults(){
   console.log('25 clicks achieved!');
 
   document.getElementById('voting').style.display = 'none';
-  document.getElementById('results-table').style.display = 'block';
+  document.getElementById('results-section').style.display = 'block';
 
   for(var i = 0; i < images.length; i++){
     images[i].displayImageResult();
