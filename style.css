@@ -22,3 +22,8 @@ img.small {
   left: 15%;
   right: 10%;
 }
+
+
+#chart {
+  width: 100%;
+}
