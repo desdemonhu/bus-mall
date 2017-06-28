@@ -25,5 +25,13 @@ img.small {
 
 
 #chart {
+  display: inline-block;
   width: 100%;
+}
+
+#pie-chart {
+  position: relative;
+  left: 20%;
+  display: inline-block;
+  width: 50%;
 }

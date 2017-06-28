@@ -223,6 +223,8 @@ function arrayCreation (){
     }
   }
 }
+
+///For charts
 var itemLabels = [];
 var itemData = [];
 var pieLabels = [];
