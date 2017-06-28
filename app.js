@@ -180,6 +180,7 @@ function displayResults(){
   arrangeResults();
   arrayCreation();
   createChart();
+  createPieChart();
 
   console.log(itemData);
   firstImageEl.removeEventListener('click', imgClick);
@@ -216,10 +217,16 @@ function arrayCreation (){
   for(var i = 0; i < images.length; i++){
     itemLabels.push(images[i].name);
     itemData.push(images[i].clicked);
+    if(i < 5){
+      pieLabels.push(images[i].name);
+      pieData.push(images[i].calculatePercent());
+    }
   }
 }
 var itemLabels = [];
 var itemData = [];
+var pieLabels = [];
+var pieData = [];
 
 var images = [
   new Photo('bag','img/bag.jpg'),
@@ -257,6 +264,26 @@ thirdImageEl.addEventListener('click', imgClick);
 randomImages(-1, [-1,-1,-1]);
 
 var ctx = document.getElementById('results-chart').getContext('2d');
+var pieCtx = document.getElementById('results-pie-graph').getContext('2d');
+
+function createPieChart (){
+  var myPieChart = new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+      labels: pieLabels,
+      datasets: [{
+        data: pieData,
+        backgroundColor: [
+          'red',
+          'yellow',
+          'green',
+          'blue',
+          'purple'
+        ]
+      }]
+    }
+  });
+}
 
 function createChart(){
   var myChart = new Chart(ctx, {
