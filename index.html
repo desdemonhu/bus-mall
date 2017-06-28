@@ -3,12 +3,18 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" integrity="sha256-SiHXR50l06UwJvHhFY4e5vzwq75vEHH+8fFNpkXePr0=" crossorigin="anonymous"></script>
     <title>Bus Mall</title>
   </head>
   <body>
+    <section id="header">
+      <h1>BusMall</h1>
+    </section>
+
     <section id = 'voting'>
       <h1>Product Voting</h1>
+      <h1 id="vote-count"></h1>
       <button type="button" name="first-image"><img src="" alt="" class="medium" id="first-image"></button>
 
       <button type="button" name="second-image"><img src="" alt="" class="medium" id="second-image"></button>
@@ -16,11 +22,11 @@
       <button type="button" name="third-image"><img src="" alt="" class="medium" id="third-image"></button>
     </section>
     <section id ="results-section">
-      <h1>Thank you for voting!</h1>
+      <h1>Your Customized Catalogue</h1>
       <button type="button" name="votingResults" id="voting-results">See Voting Results</button>
     </section>
     <section id="pie-chart">
-      <h1>Top 5 by Percentage of Clicks</h1>
+      <h1 id="pie-chart-h1"></h1>
       <canvas id="results-pie-graph"></canvas>
     </section>
     <section id="chart">

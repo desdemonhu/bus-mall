@@ -23,13 +23,15 @@ Photo.prototype.calculatePercent = function(){
 Photo.prototype.displayImageResult = function(){
   var sectionEl = document.createElement('section');
   var imageCreateEl = document.createElement('img');
-  var captionEl = document.createElement('caption');
+  var captionEl = document.createElement('p');
   var buyButtonEl = document.createElement('button');
 
   imageCreateEl.src = this.path;
   imageCreateEl.setAttribute('class', 'small');
   sectionEl.setAttribute('id', this.idTag);
+  sectionEl.setAttribute('class', 'results-grid');
   captionEl.textContent = this.clicked + ' votes for the ' + this.name;
+  captionEl.setAttribute('class', 'results-text');
   buyButtonEl.textContent = 'Buy now!';
   buyButtonEl.setAttribute('class', 'buy-button');
 
@@ -37,19 +39,6 @@ Photo.prototype.displayImageResult = function(){
   sectionEl.appendChild(captionEl);
   sectionEl.appendChild(buyButtonEl);
   resultsGalleryEl.appendChild(sectionEl);
-  // var tableRowEl = document.createElement('tr');
-  // var tableCellEl = document.createElement('td');
-  //var imageEl = document.createElement('img');
-  // var imageCaptionEl = document.createElement('td');
-  //
-  // imageEl.setAttribute('src', this.path);
-  // imageEl.setAttribute('class', 'small');
-  // imageCaptionEl.textContent = this.clicked + ' votes for the ' + this.name;
-  //
-  // tableCellEl.appendChild(imageEl);
-  // tableRowEl.appendChild(tableCellEl);
-  // tableRowEl.appendChild(imageCaptionEl);
-  // resultsGalleryEl.appendChild(tableRowEl);
 };
 
 ///Gets shortName from Path
@@ -106,6 +95,7 @@ function imgClick(event){
     displayResults();
   }else{
     randomImages(index, imagesArray);
+    document.getElementById('vote-count').textContent = (25 - totalClicks) + ' votes left';
   }
 }
 
@@ -230,6 +220,7 @@ function arrangeResults(){
   console.log(images);
 }
 
+///Creates arrays needed for the charts
 function arrayCreation (){
   for(var i = 0; i < images.length; i++){
     itemLabels.push(images[i].name);
@@ -243,6 +234,7 @@ function arrayCreation (){
 
 function showVoting(event){
   document.getElementById('results-section').style.display = 'none';
+  document.getElementById('pie-chart-h1').textContent = 'Top 5 by Percentage of Clicks';
   createChart();
   createPieChart();
 }
