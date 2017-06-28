@@ -60,7 +60,7 @@ img.small {
 
 #chart {
   display: inline-block;
-  width: 100%;
+  width: 55%;
 }
 
 #pie-chart {
@@ -68,7 +68,7 @@ img.small {
   position: relative;
   left: 20%;
   display: inline-block;
-  width: 50%;
+  width: 40%;
 }
 
 .buy-button {
