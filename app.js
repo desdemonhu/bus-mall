@@ -27,9 +27,11 @@ Photo.prototype.displayImageResult = function(){
   var buyButtonEl = document.createElement('button');
 
   imageCreateEl.src = this.path;
+  imageCreateEl.setAttribute('class', 'small');
   sectionEl.setAttribute('id', this.idTag);
   captionEl.textContent = this.clicked + ' votes for the ' + this.name;
   buyButtonEl.textContent = 'Buy now!';
+  buyButtonEl.setAttribute('class', 'buy-button');
 
   sectionEl.appendChild(imageCreateEl);
   sectionEl.appendChild(captionEl);
