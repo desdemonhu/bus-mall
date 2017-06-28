@@ -30,6 +30,7 @@ img.small {
 }
 
 #pie-chart {
+  display: none;
   position: relative;
   left: 20%;
   display: inline-block;

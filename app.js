@@ -21,19 +21,33 @@ Photo.prototype.calculatePercent = function(){
 };
 
 Photo.prototype.displayImageResult = function(){
-  var tableRowEl = document.createElement('tr');
-  var tableCellEl = document.createElement('td');
-  var imageEl = document.createElement('img');
-  var imageCaptionEl = document.createElement('td');
+  var sectionEl = document.createElement('section');
+  var imageCreateEl = document.createElement('img');
+  var captionEl = document.createElement('caption');
+  var buyButtonEl = document.createElement('button');
 
-  imageEl.setAttribute('src', this.path);
-  imageEl.setAttribute('class', 'small');
-  imageCaptionEl.textContent = this.clicked + ' votes for the ' + this.name;
+  imageCreateEl.src = this.path;
+  sectionEl.setAttribute('id', this.idTag);
+  captionEl.textContent = this.clicked + ' votes for the ' + this.name;
+  buyButtonEl.textContent = 'Buy now!';
 
-  tableCellEl.appendChild(imageEl);
-  tableRowEl.appendChild(tableCellEl);
-  tableRowEl.appendChild(imageCaptionEl);
-  resultsGalleryEl.appendChild(tableRowEl);
+  sectionEl.appendChild(imageCreateEl);
+  sectionEl.appendChild(captionEl);
+  sectionEl.appendChild(buyButtonEl);
+  resultsGalleryEl.appendChild(sectionEl);
+  // var tableRowEl = document.createElement('tr');
+  // var tableCellEl = document.createElement('td');
+  //var imageEl = document.createElement('img');
+  // var imageCaptionEl = document.createElement('td');
+  //
+  // imageEl.setAttribute('src', this.path);
+  // imageEl.setAttribute('class', 'small');
+  // imageCaptionEl.textContent = this.clicked + ' votes for the ' + this.name;
+  //
+  // tableCellEl.appendChild(imageEl);
+  // tableRowEl.appendChild(tableCellEl);
+  // tableRowEl.appendChild(imageCaptionEl);
+  // resultsGalleryEl.appendChild(tableRowEl);
 };
 
 ///Gets shortName from Path
@@ -179,8 +193,8 @@ function displayResults(){
   ///Arranges pictures in order of clicks
   arrangeResults();
   arrayCreation();
-  createChart();
-  createPieChart();
+  // createChart();
+  // createPieChart();
 
   console.log(itemData);
   firstImageEl.removeEventListener('click', imgClick);
@@ -189,11 +203,12 @@ function displayResults(){
   console.log('25 clicks achieved!');
 
   document.getElementById('voting').style.display = 'none';
-  // document.getElementById('results-section').style.display = 'block';
-  //
-  // for(var i = 0; i < images.length; i++){
-  //   images[i].displayImageResult();
-  // }
+
+  document.getElementById('results-section').style.display = 'block';
+
+  for(var i = 0; i < 6; i++){
+    images[i].displayImageResult();
+  }
 }
 
 function arrangeResults(){
@@ -222,6 +237,12 @@ function arrayCreation (){
       pieData.push(images[i].calculatePercent());
     }
   }
+}
+
+function showVoting(event){
+  document.getElementById('results-section').style.display = 'none';
+  createChart();
+  createPieChart();
 }
 
 ///For charts
@@ -256,12 +277,14 @@ var images = [
 var firstImageEl = document.getElementById('first-image');
 var secondImageEl = document.getElementById('second-image');
 var thirdImageEl = document.getElementById('third-image');
-var resultsGalleryEl = document.getElementById('results-gallery');
+var resultsGalleryEl = document.getElementById('results-section');
+var resultsButtonEl = document.getElementById('voting-results');
 var totalClicks = 0;
 
 firstImageEl.addEventListener('click', imgClick);
 secondImageEl.addEventListener('click', imgClick);
 thirdImageEl.addEventListener('click', imgClick);
+resultsButtonEl.addEventListener('click',showVoting);
 
 randomImages(-1, [-1,-1,-1]);
 
