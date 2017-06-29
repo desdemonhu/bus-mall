@@ -238,6 +238,7 @@ function showVoting(event){
   document.getElementById('pie-chart-h1').textContent = 'Top 5 by Percentage of Clicks';
   createPieChart();
   createChart();
+  saveStatsToLocalStorage(itemData);
 }
 
 ///For charts
@@ -378,4 +379,10 @@ function createChart(){
       }
     }
   });
+}
+
+///Pull in stats from chart and stringify it
+function saveStatsToLocalStorage(stats){
+  var imagesString = JSON.stringify(images);
+  localStorage.images = imagesString;
 }
