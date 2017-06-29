@@ -234,9 +234,10 @@ function arrayCreation (){
 
 function showVoting(event){
   document.getElementById('results-section').style.display = 'none';
+  document.getElementById('catalogue-button').style.display = 'inline-block';
   document.getElementById('pie-chart-h1').textContent = 'Top 5 by Percentage of Clicks';
-  createChart();
   createPieChart();
+  createChart();
 }
 
 ///For charts
@@ -279,6 +280,11 @@ firstImageEl.addEventListener('click', imgClick);
 secondImageEl.addEventListener('click', imgClick);
 thirdImageEl.addEventListener('click', imgClick);
 resultsButtonEl.addEventListener('click',showVoting);
+
+///Re show voting results if Your Catalogue button is clicked
+document.getElementById('catalogue-button').addEventListener('click', function(){
+  resultsGalleryEl.style.display = 'inline-block';
+});
 
 randomImages(-1, [-1,-1,-1]);
 
