@@ -270,7 +270,7 @@ document.getElementById('catalogue-button').addEventListener('click', function()
 if(localStorage.images){
   console.log(localStorage.images);
   var playButtonEl = document.createElement('button');
-  playButtonEl.textContent = 'Play again';
+  playButtonEl.textContent = 'Reset Results';
 
   document.getElementById('results-section').appendChild(playButtonEl);
   playButtonEl.addEventListener('click', refreshPage);
@@ -284,7 +284,7 @@ if(localStorage.images){
     newPhoto.shown = results[i].shown;
     images.push(newPhoto);
   }
-  displayResults();
+  randomImages(-1, [-1,-1,-1]);
 }else {
   images = [
     new Photo('bag','img/bag.jpg'),
