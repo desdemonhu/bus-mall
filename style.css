@@ -13,6 +13,16 @@ img.small {
   height:200px;
 }
 
+#first-image, #second-image, #third-image{
+  transition: width .2s linear, height .2s linear;
+}
+
+#first-image:hover, #second-image:hover, #third-image:hover {
+  width: 350px;
+  height: 350px;
+  border: 2px solid black;
+}
+
 #header {
   background-color: black;
   color: white;
