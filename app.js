@@ -271,8 +271,9 @@ if(localStorage.images){
   console.log(localStorage.images);
   var playButtonEl = document.createElement('button');
   playButtonEl.textContent = 'Reset Results';
+  playButtonEl.setAttribute('id', 'reload-button');
 
-  document.getElementById('results-section').appendChild(playButtonEl);
+  document.getElementById('voting').appendChild(playButtonEl);
   playButtonEl.addEventListener('click', refreshPage);
 
   var results = JSON.parse(localStorage.images);
