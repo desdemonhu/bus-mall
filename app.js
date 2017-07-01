@@ -247,28 +247,7 @@ var itemData = [];
 var pieLabels = [];
 var pieData = [];
 
-var images = [
-  new Photo('bag','img/bag.jpg'),
-  new Photo('banana', 'img/banana.jpg'),
-  new Photo('bathroom','img/bathroom.jpg'),
-  new Photo('boots', 'img/boots.jpg'),
-  new Photo('breakfast', 'img/breakfast.jpg'),
-  new Photo('bubblegum', 'img/bubblegum.jpg'),
-  new Photo('chair', 'img/chair.jpg'),
-  new Photo('cthulhu', 'img/cthulhu.jpg'),
-  new Photo('dog-duck', 'img/dog-duck.jpg'),
-  new Photo('dragon', 'img/dragon.jpg'),
-  new Photo('pen', 'img/pen.jpg'),
-  new Photo('pet-sweep', 'img/pet-sweep.jpg'),
-  new Photo('scissors', 'img/scissors.jpg'),
-  new Photo('shark', 'img/shark.jpg'),
-  new Photo('sweep', 'img/sweep.png'),
-  new Photo('tauntun', 'img/tauntaun.jpg'),
-  new Photo('unicorn', 'img/unicorn.jpg'),
-  new Photo('usb', 'img/usb.gif'),
-  new Photo('water-can', 'img/water-can.jpg'),
-  new Photo('wine-glass', 'img/wine-glass.jpg')
-];
+var images = [];
 
 var firstImageEl = document.getElementById('first-image');
 var secondImageEl = document.getElementById('second-image');
@@ -287,7 +266,50 @@ document.getElementById('catalogue-button').addEventListener('click', function()
   resultsGalleryEl.style.display = 'inline-block';
 });
 
-randomImages(-1, [-1,-1,-1]);
+///If local storage exists, just create reload button and do chart
+if(localStorage.images){
+  console.log(localStorage.images);
+  var playButtonEl = document.createElement('button');
+  playButtonEl.textContent = 'Play again';
+
+  document.getElementById('results-section').appendChild(playButtonEl);
+  playButtonEl.addEventListener('click', refreshPage);
+
+  var results = JSON.parse(localStorage.images);
+  console.log('This is the reloaded results:');
+  console.log(results);
+  for(var i = 0; i < results.length; i++){
+    var newPhoto = new Photo(results[i].name, results[i].path);
+    newPhoto.clicked = results[i].clicked;
+    newPhoto.shown = results[i].shown;
+    images.push(newPhoto);
+  }
+  displayResults();
+}else {
+  images = [
+    new Photo('bag','img/bag.jpg'),
+    new Photo('banana', 'img/banana.jpg'),
+    new Photo('bathroom','img/bathroom.jpg'),
+    new Photo('boots', 'img/boots.jpg'),
+    new Photo('breakfast', 'img/breakfast.jpg'),
+    new Photo('bubblegum', 'img/bubblegum.jpg'),
+    new Photo('chair', 'img/chair.jpg'),
+    new Photo('cthulhu', 'img/cthulhu.jpg'),
+    new Photo('dog-duck', 'img/dog-duck.jpg'),
+    new Photo('dragon', 'img/dragon.jpg'),
+    new Photo('pen', 'img/pen.jpg'),
+    new Photo('pet-sweep', 'img/pet-sweep.jpg'),
+    new Photo('scissors', 'img/scissors.jpg'),
+    new Photo('shark', 'img/shark.jpg'),
+    new Photo('sweep', 'img/sweep.png'),
+    new Photo('tauntun', 'img/tauntaun.jpg'),
+    new Photo('unicorn', 'img/unicorn.jpg'),
+    new Photo('usb', 'img/usb.gif'),
+    new Photo('water-can', 'img/water-can.jpg'),
+    new Photo('wine-glass', 'img/wine-glass.jpg')
+  ];
+  randomImages(-1, [-1,-1,-1]);
+}
 
 var ctx = document.getElementById('results-chart').getContext('2d');
 var pieCtx = document.getElementById('results-pie-graph').getContext('2d');
@@ -385,4 +407,9 @@ function createChart(){
 function saveStatsToLocalStorage(stats){
   var imagesString = JSON.stringify(images);
   localStorage.images = imagesString;
+}
+
+function refreshPage (event){
+  localStorage.clear();
+  location.reload();
 }
